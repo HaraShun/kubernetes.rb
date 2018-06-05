@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: web-server
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: web-server
+        tier: backend
+    spec:
+      containers:
+      - name: sinatra-server
+        image: yhirano55/static-sinatra-example
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        imagePullPolicy: Always
+      - name: nginx
+        image: yhirano55/nginx-for-static-sinatra-example
+        ports:
+        - containerPort: 80
+          protocol: TCP
+          name: http
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            # Path to probe; should be cheap, but representative of typical behavior
+            path: /readiness.html
+            port: 80
+          initialDelaySeconds: 30
+          timeoutSeconds: 1
