@@ -12,24 +12,24 @@
 2. Deploymentを作成
 
     ```
-    $ kubectl run nginx --image=nginx:1.11.3 --port 80
-    deployment "nginx" created
+    $ kubectl apply -f k8s/deployment.yml
+    deployment.apps/nginx created
     ```
 
 3. Deploymentを公開
 
     ```
-    $ kubectl expose deployment nginx --type LoadBalancer
-    service "nginx" exposed
+    $ kubectl apply -f k8s/service.yml
+    service/nginx created
     ```
 
 4. アプリケーションの検査と表示
 
     ```
     $ kubectl get services
-    NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
-    kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP        29s
-    nginx        LoadBalancer   10.102.222.47   <pending>     80:30685/TCP   5s
+    NAME          TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+    kubernetes    ClusterIP      10.96.0.1        <none>        443/TCP        57m
+    nginx         LoadBalancer   10.103.122.40    <pending>     80:31052/TCP   13s
     ```
 
 5. nginxのURLを確認する
@@ -60,27 +60,27 @@
 2. Deploymentを作成
 
     ```
-    $ kubectl run nginx --image=nginx:1.11.3 --port 80
-    deployment "nginx" created
+    $ kubectl apply -f k8s/deployment.yml
+    deployment.apps/nginx created
     ```
 
 3. Deploymentを公開
 
     ```
-    $ kubectl expose deployment nginx --type LoadBalancer
-    service "nginx" exposed
+    $ kubectl apply -f k8s/service.yml
+    service/nginx created
     ```
 
 4. アプリケーションの検査と表示
 
     ```
     $ kubectl get services
-    NAME         TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)        AGE
-    kubernetes   ClusterIP      10.7.240.1     <none>           443/TCP        20m
-    nginx        LoadBalancer   10.7.243.161   35.194.251.219   80:32203/TCP   1m
+    NAME         TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)        AGE
+    kubernetes   ClusterIP      10.55.240.1    <none>         443/TCP        2m
+    nginx        LoadBalancer   10.55.242.15   35.200.28.96   80:31947/TCP   1m
     ```
 
-5. `http://{EXTERNAL-IP}:8080` を確認
+5. `http://{EXTERNAL-IP}` を確認
 
 6. クリーンアップ
 
