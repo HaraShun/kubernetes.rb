@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rails-db-migrate-job
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        name: rails-db-migrate-job
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: app
+        image: yhirano55/spa
+        command: ["bin/rails", "db:migrate"]
+        env:
+        - name: RAILS_ENV
+          value: production
+        - name: RAILS_MASTER_KEY
+          valueFrom: 
+            secretKeyRef:
+              name: rails-secret
+              key: RAILS_MASTER_KEY
+        - name: RAILS_LOG_TO_STDOUT
+          value: "true"
+        - name: DATABASE_HOST
+          value: db-service.default.svc.cluster.local
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD
