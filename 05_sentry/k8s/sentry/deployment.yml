@@ -1,0 +1,118 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentry-web-deployment
+  labels:
+    app: sentry-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sentry-web
+  template:
+    metadata:
+      labels:
+        app: sentry-web
+    spec:
+      containers:
+      - name: web
+        image: sentry:9.0.0
+        env:
+        - name: SENTRY_REDIS_HOST
+          value: redis-service.default.svc.cluster.local
+        - name: SENTRY_POSTGRES_HOST
+          value: db-service.default.svc.cluster.local
+        - name: SENTRY_DB_USER
+          value: sentry
+        - name: SENTRY_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD
+        - name: SENTRY_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: sentry-secret
+              key: SENTRY_SECRET_KEY
+      # - name: cron
+      #   image: sentry:9.0.0
+      #   command: ["sentry", "run", "cron"]
+      #   env:
+      #   - name: SENTRY_REDIS_HOST
+      #     value: redis-service.default.svc.cluster.local
+      #   - name: SENTRY_POSTGRES_HOST
+      #     value: db-service.default.svc.cluster.local
+      #   - name: SENTRY_DB_USER
+      #     value: sentry
+      #   - name: SENTRY_DB_PASSWORD
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: db-secret
+      #         key: POSTGRES_PASSWORD
+      #   - name: SENTRY_SECRET_KEY
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: sentry-secret
+      #         key: SENTRY_SECRET_KEY
+      # - name: worker
+      #   image: sentry:9.0.0
+      #   command: ["sentry", "run", "worker"]
+      #   env:
+      #   - name: C_FORCE_ROOT
+      #     value: "true"
+      #   - name: SENTRY_REDIS_HOST
+      #     value: redis-service.default.svc.cluster.local
+      #   - name: SENTRY_POSTGRES_HOST
+      #     value: db-service.default.svc.cluster.local
+      #   - name: SENTRY_DB_USER
+      #     value: sentry
+      #   - name: SENTRY_DB_PASSWORD
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: db-secret
+      #         key: POSTGRES_PASSWORD
+      #   - name: SENTRY_SECRET_KEY
+      #     valueFrom:
+      #       secretKeyRef:
+      #         name: sentry-secret
+      #         key: SENTRY_SECRET_KEY
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentry-cron-deployment
+  labels:
+    app: sentry-cron
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sentry-cron
+  template:
+    metadata:
+      labels:
+        app: sentry-cron
+    spec:
+      containers:
+      - name: cron
+        image: sentry:9.0.0
+        command: ["sentry", "run", "cron"]
+        env:
+        - name: SENTRY_REDIS_HOST
+          value: redis-service.default.svc.cluster.local
+        - name: SENTRY_POSTGRES_HOST
+          value: db-service.default.svc.cluster.local
+        - name: SENTRY_DB_USER
+          value: sentry
+        - name: SENTRY_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD
+        - name: SENTRY_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: sentry-secret
+              key: SENTRY_SECRET_KEY

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sentry-worker-statefulset
+spec:
+  replicas: 1
+  updateStrategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: sentry-worker
+  serviceName: sentry-worker
+  template:
+    metadata:
+      labels:
+        app: sentry-worker
+    spec:
+      containers:
+      - name: worker
+        image: sentry:9.0.0
+        command: ["sentry", "run", "worker"]
+        env:
+        - name: C_FORCE_ROOT
+          value: "true"
+        - name: SENTRY_REDIS_HOST
+          value: redis-service.default.svc.cluster.local
+        - name: SENTRY_POSTGRES_HOST
+          value: db-service.default.svc.cluster.local
+        - name: SENTRY_DB_USER
+          value: sentry
+        - name: SENTRY_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD
+        - name: SENTRY_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: sentry-secret
+              key: SENTRY_SECRET_KEY
