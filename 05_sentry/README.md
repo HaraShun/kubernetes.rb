@@ -42,9 +42,7 @@
    # ジョブの実行を待つ
    $ kubectl get jobs -w
    NAME                 DESIRED   SUCCESSFUL   AGE
-   sentry-upgrade-job   1         0            1m
-
-   sentry-upgrade-job   1         1         3m
+   sentry-upgrade-job   1         1            3m
 
    $ kubectl apply -f k8s/jobs/sentry-createuser-job.yaml
    job.batch/sentry-createuser-job created
@@ -52,10 +50,8 @@
    # ジョブの実行を待つ
    $ kubectl get jobs -w
    NAME                     DESIRED   SUCCESSFUL   AGE
-   sentry-createuser-job   1         0            5s
+   sentry-createuser-job    1         1            6s
    sentry-upgrade-job       1         1            3m
-
-   sentry-createuser-job   1         1         6s
    ```
 
 6. Sentry用のDeployment, StatefulSet, Service作成
@@ -146,9 +142,7 @@
    # ジョブの実行を待つ
    $ kubectl get jobs -w
    NAME                 DESIRED   SUCCESSFUL   AGE
-   sentry-upgrade-job   1         0            1m
-
-   sentry-upgrade-job   1         1         3m
+   sentry-upgrade-job   1         1            3m
 
    $ kubectl apply -f k8s/jobs/sentry-createuser-job.yaml
    job.batch/sentry-createuser-job created
@@ -156,10 +150,8 @@
    # ジョブの実行を待つ
    $ kubectl get jobs -w
    NAME                     DESIRED   SUCCESSFUL   AGE
-   sentry-createuser-job   1         0            5s
+   sentry-createuser-job    1         1            6s
    sentry-upgrade-job       1         1            3m
-
-   sentry-createuser-job   1         1         6s
    ```
 
 6. Sentry用のDeployment, StatefulSet, Service作成
@@ -194,6 +186,12 @@
 
     ```
     $ kubectl delete services --all
-    $ kubectl delete persistentVolumeClaims --all
     $ gcloud container clusters delete {CLUSTER_NAME}
+
+    # Persistent Disk が消えてなかったら削除する
+    $ gcloud compute disks list
+    NAME                                                             ZONE               SIZE_GB  TYPE         STATUS
+    gke-sandbox-03a6b1f9-d-pvc-9ab991b7-89c2-11e8-af42-42010a92009f  asia-northeast1-b  10       pd-standard  READY
+
+    $ gcloud compute disks delete {Persistent Disk Name}
     ```

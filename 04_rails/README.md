@@ -36,11 +36,29 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
    $ kubectl apply -f k8s/jobs/rails-db-create-job.yaml
    job.batch/rails-db-create-job created
 
+   # ジョブの実行を待つ
+   $ kubectl get jobs -w
+   NAME                  DESIRED   SUCCESSFUL   AGE
+   rails-db-create-job   1         1            42s
+
    $ kubectl apply -f k8s/jobs/rails-db-migrate-job.yaml
    job.batch/rails-db-migrate-job created
 
+   # ジョブの実行を待つ
+   $ kubectl get jobs -w
+   NAME                   DESIRED   SUCCESSFUL   AGE
+   rails-db-create-job    1         1            1m
+   rails-db-migrate-job   1         1            11s
+
    $ kubectl apply -f k8s/jobs/rails-db-seed-job.yaml
    job.batch/rails-db-seed-job created
+
+   # ジョブの実行を待つ
+   $ kubectl get jobs -w
+   NAME                   DESIRED   SUCCESSFUL   AGE
+   rails-db-create-job    1         1            3m
+   rails-db-migrate-job   1         1            1m
+   rails-db-seed-job      1         1            15s
    ```
 
 5. アプリケーションの検査と表示
@@ -112,11 +130,29 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
    $ kubectl apply -f k8s/jobs/rails-db-create-job.yaml
    job.batch/rails-db-create-job created
 
+   # ジョブの実行を待つ
+   $ kubectl get jobs -w
+   NAME                  DESIRED   SUCCESSFUL   AGE
+   rails-db-create-job   1         1            42s
+
    $ kubectl apply -f k8s/jobs/rails-db-migrate-job.yaml
    job.batch/rails-db-migrate-job created
 
+   # ジョブの実行を待つ
+   $ kubectl get jobs -w
+   NAME                   DESIRED   SUCCESSFUL   AGE
+   rails-db-create-job    1         1            1m
+   rails-db-migrate-job   1         1            11s
+
    $ kubectl apply -f k8s/jobs/rails-db-seed-job.yaml
    job.batch/rails-db-seed-job created
+
+   # ジョブの実行を待つ
+   $ kubectl get jobs -w
+   NAME                   DESIRED   SUCCESSFUL   AGE
+   rails-db-create-job    1         1            3m
+   rails-db-migrate-job   1         1            1m
+   rails-db-seed-job      1         1            15s
    ```
 
 5. アプリケーションの検査と表示
@@ -137,6 +173,12 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
 
     ```
     $ kubectl delete services --all
-    $ kubectl delete persistentVolumeClaims --all
     $ gcloud container clusters delete {CLUSTER_NAME}
+
+    # Persistent Disk が消えてなかったら削除する
+    $ gcloud compute disks list
+    NAME                                                             ZONE               SIZE_GB  TYPE         STATUS
+    gke-sandbox-03a6b1f9-d-pvc-9ab991b7-89c2-11e8-af42-42010a92009f  asia-northeast1-b  10       pd-standard  READY
+
+    $ gcloud compute disks delete {Persistent Disk Name}
     ```
