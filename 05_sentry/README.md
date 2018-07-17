@@ -29,14 +29,14 @@
 4. Sentry用のSecretのみ作成
 
    ```
-   $ kubectl apply -f k8s/sentry/secret.yml
+   $ kubectl apply -f k8s/sentry/secret.yaml
    secret/sentry-secret created
    ```
 
 5. DBのマイグレーションとsuperuserの作成Jobを実行
 
    ```
-   $ kubectl apply -f k8s/jobs/sentry-upgrade-job.yml
+   $ kubectl apply -f k8s/jobs/sentry-upgrade-job.yaml
    job.batch/sentry-upgrade-job created
 
    # ジョブの実行を待つ
@@ -46,7 +46,7 @@
 
    sentry-upgrade-job   1         1         3m
 
-   $ kubectl apply -f k8s/jobs/sentry-createuser-job.yml
+   $ kubectl apply -f k8s/jobs/sentry-createuser-job.yaml
    job.batch/sentry-createuser-job created
 
    # ジョブの実行を待つ
@@ -133,14 +133,14 @@
 4. Sentry用のSecretのみ作成
 
    ```
-   $ kubectl apply -f k8s/sentry/secret.yml
+   $ kubectl apply -f k8s/sentry/secret.yaml
    secret/sentry-secret created
    ```
 
 5. DBのマイグレーションとsuperuserの作成Jobを実行
 
    ```
-   $ kubectl apply -f k8s/jobs/sentry-upgrade-job.yml
+   $ kubectl apply -f k8s/jobs/sentry-upgrade-job.yaml
    job.batch/sentry-upgrade-job created
 
    # ジョブの実行を待つ
@@ -150,7 +150,7 @@
 
    sentry-upgrade-job   1         1         3m
 
-   $ kubectl apply -f k8s/jobs/sentry-createuser-job.yml
+   $ kubectl apply -f k8s/jobs/sentry-createuser-job.yaml
    job.batch/sentry-createuser-job created
 
    # ジョブの実行を待つ

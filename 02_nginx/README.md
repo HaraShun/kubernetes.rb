@@ -12,14 +12,14 @@
 2. Deploymentを作成
 
     ```
-    $ kubectl apply -f k8s/deployment.yml
+    $ kubectl apply -f k8s/deployment.yaml
     deployment.apps/nginx created
     ```
 
 3. Deploymentを公開
 
     ```
-    $ kubectl apply -f k8s/service.yml
+    $ kubectl apply -f k8s/service.yaml
     service/nginx created
     ```
 
@@ -60,14 +60,14 @@
 2. Deploymentを作成
 
     ```
-    $ kubectl apply -f k8s/deployment.yml
+    $ kubectl apply -f k8s/deployment.yaml
     deployment.apps/nginx created
     ```
 
 3. Deploymentを公開
 
     ```
-    $ kubectl apply -f k8s/service.yml
+    $ kubectl apply -f k8s/service.yaml
     service/nginx created
     ```
 

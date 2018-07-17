@@ -33,13 +33,13 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
 4. DBの作成とマイグレーション、初期データの投入Jobを実行
 
    ```
-   $ kubectl apply -f k8s/jobs/rails-db-create-job.yml
+   $ kubectl apply -f k8s/jobs/rails-db-create-job.yaml
    job.batch/rails-db-create-job created
 
-   $ kubectl apply -f k8s/jobs/rails-db-migrate-job.yml
+   $ kubectl apply -f k8s/jobs/rails-db-migrate-job.yaml
    job.batch/rails-db-migrate-job created
 
-   $ kubectl apply -f k8s/jobs/rails-db-seed-job.yml
+   $ kubectl apply -f k8s/jobs/rails-db-seed-job.yaml
    job.batch/rails-db-seed-job created
    ```
 
@@ -105,13 +105,13 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
 4. DBの作成とマイグレーション、初期データの投入Jobを実行
 
    ```
-   $ kubectl apply -f k8s/jobs/rails-db-create-job.yml
+   $ kubectl apply -f k8s/jobs/rails-db-create-job.yaml
    job.batch/rails-db-create-job created
 
-   $ kubectl apply -f k8s/jobs/rails-db-migrate-job.yml
+   $ kubectl apply -f k8s/jobs/rails-db-migrate-job.yaml
    job.batch/rails-db-migrate-job created
 
-   $ kubectl apply -f k8s/jobs/rails-db-seed-job.yml
+   $ kubectl apply -f k8s/jobs/rails-db-seed-job.yaml
    job.batch/rails-db-seed-job created
    ```
 

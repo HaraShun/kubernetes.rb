@@ -14,14 +14,14 @@ https://github.com/yhirano55/static-sinatra-example/
 2. Deployment作成
 
     ```
-    $ kubectl apply -f k8s/deployment.yml
+    $ kubectl apply -f k8s/deployment.yaml
     deployment "web-server" created
     ```
 
 2. Service作成
 
     ```
-    $ kubectl apply -f k8s/service.yml
+    $ kubectl apply -f k8s/service.yaml
     service "web-server" created
     ```
 
@@ -62,13 +62,13 @@ https://github.com/yhirano55/static-sinatra-example/
 2. Deployment作成
 
     ```
-    $ kubectl apply -f k8s/deployment.yml
+    $ kubectl apply -f k8s/deployment.yaml
     ```
 
 2. Service作成
 
     ```
-    $ kubectl apply -f k8s/service.yml
+    $ kubectl apply -f k8s/service.yaml
     ```
 
 3. アプリケーションの検査と表示
