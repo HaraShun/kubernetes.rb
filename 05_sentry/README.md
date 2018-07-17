@@ -69,7 +69,7 @@
    statefulset.apps/sentry-worker-statefulset created
    ```
 
-5. アプリケーションの検査と表示
+7. アプリケーションの検査と表示
 
     ```
     $ kubectl get services
@@ -80,14 +80,14 @@
     sentry-service   LoadBalancer   10.96.94.151     <pending>     80:30607/TCP   39m
     ```
 
-6. sentry-serviceのURLを確認する
+8. sentry-serviceのURLを確認する
 
     ```
     $ minikube service sentry-service --url
     http://192.168.64.9:30607
     ```
 
-7. クリーンアップ
+9. クリーンアップ
 
     ```
     $ kubectl delete deployments --all
