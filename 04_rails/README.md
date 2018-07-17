@@ -60,7 +60,11 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
     http://192.168.64.7:31037
     ```
 
-7. クリーンアップ
+7. Railsのアプリケーションにログインできることを確認する
+
+   ![image](rails_login.png)
+
+8. クリーンアップ
 
     ```
     $ kubectl delete deployments --all
@@ -127,7 +131,9 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
 
 6. `http://{EXTERNAL-IP}` を確認
 
-7. クリーンアップ
+   ![image](rails_login.png)
+
+8. クリーンアップ
 
     ```
     $ kubectl delete services --all
