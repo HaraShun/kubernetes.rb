@@ -34,48 +34,6 @@ spec:
             secretKeyRef:
               name: sentry-secret
               key: SENTRY_SECRET_KEY
-      # - name: cron
-      #   image: sentry:9.0.0
-      #   command: ["sentry", "run", "cron"]
-      #   env:
-      #   - name: SENTRY_REDIS_HOST
-      #     value: redis-service.default.svc.cluster.local
-      #   - name: SENTRY_POSTGRES_HOST
-      #     value: db-service.default.svc.cluster.local
-      #   - name: SENTRY_DB_USER
-      #     value: sentry
-      #   - name: SENTRY_DB_PASSWORD
-      #     valueFrom:
-      #       secretKeyRef:
-      #         name: db-secret
-      #         key: POSTGRES_PASSWORD
-      #   - name: SENTRY_SECRET_KEY
-      #     valueFrom:
-      #       secretKeyRef:
-      #         name: sentry-secret
-      #         key: SENTRY_SECRET_KEY
-      # - name: worker
-      #   image: sentry:9.0.0
-      #   command: ["sentry", "run", "worker"]
-      #   env:
-      #   - name: C_FORCE_ROOT
-      #     value: "true"
-      #   - name: SENTRY_REDIS_HOST
-      #     value: redis-service.default.svc.cluster.local
-      #   - name: SENTRY_POSTGRES_HOST
-      #     value: db-service.default.svc.cluster.local
-      #   - name: SENTRY_DB_USER
-      #     value: sentry
-      #   - name: SENTRY_DB_PASSWORD
-      #     valueFrom:
-      #       secretKeyRef:
-      #         name: db-secret
-      #         key: POSTGRES_PASSWORD
-      #   - name: SENTRY_SECRET_KEY
-      #     valueFrom:
-      #       secretKeyRef:
-      #         name: sentry-secret
-      #         key: SENTRY_SECRET_KEY
 
 ---
 
