@@ -87,7 +87,11 @@
     http://192.168.64.9:30607
     ```
 
-9. クリーンアップ
+9. Sentryのアプリケーションにログインできることを確認する
+
+    ![image](./sentry_login.png)
+
+10. クリーンアップ
 
     ```
     $ kubectl delete deployments --all
@@ -182,7 +186,11 @@
 
 8. `http://{EXTERNAL-IP}` を確認
 
-9. クリーンアップ
+9. Sentryのアプリケーションにログインできることを確認する
+
+    ![image](./sentry_login.png)
+
+10. クリーンアップ
 
     ```
     $ kubectl delete services --all
