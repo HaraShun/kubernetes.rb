@@ -85,7 +85,22 @@
 6. クリーンアップ
 
     ```
+    $ kubectl delete services --all
     $ gcloud container clusters delete {CLUSTER_NAME}
+
+    # Target Pool が消えてなかったら削除する
+    $ gcloud compute target-pools list
+    NAME                              REGION           SESSION_AFFINITY  BACKUP  HEALTH_CHECKS
+    a94cad7df8b4a11e88e7d42010a92012  asia-northeast1  NONE                      k8s-b3bfb4ae39736392-node
+
+    $ gcloud compute target-pools delete {NAME}
+
+    # Load Balancer が消えてなかったら削除する
+    $ gcloud compute http-health-checks list
+    NAME                       HOST  PORT   REQUEST_PATH
+    k8s-b3bfb4ae39736392-node        10256  /healthz
+
+    $ gcloud compute http-health-checks delete {NAME}
     ```
 
 ## 参考

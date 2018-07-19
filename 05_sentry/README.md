@@ -193,5 +193,19 @@
     NAME                                                             ZONE               SIZE_GB  TYPE         STATUS
     gke-sandbox-03a6b1f9-d-pvc-9ab991b7-89c2-11e8-af42-42010a92009f  asia-northeast1-b  10       pd-standard  READY
 
-    $ gcloud compute disks delete {Persistent Disk Name}
+    $ gcloud compute disks delete {NAME}
+
+    # Target Pool が消えてなかったら削除する
+    $ gcloud compute target-pools list
+    NAME                              REGION           SESSION_AFFINITY  BACKUP  HEALTH_CHECKS
+    a94cad7df8b4a11e88e7d42010a92012  asia-northeast1  NONE                      k8s-b3bfb4ae39736392-node
+
+    $ gcloud compute target-pools delete {NAME}
+
+    # Load Balancer が消えてなかったら削除する
+    $ gcloud compute http-health-checks list
+    NAME                       HOST  PORT   REQUEST_PATH
+    k8s-b3bfb4ae39736392-node        10256  /healthz
+
+    $ gcloud compute http-health-checks delete {NAME}
     ```
