@@ -17,6 +17,8 @@ spec:
       containers:
       - name: web
         image: sentry:9.0.0
+        ports:
+        - containerPort: 9000
         env:
         - name: SENTRY_REDIS_HOST
           value: redis-service.default.svc.cluster.local
@@ -34,6 +36,9 @@ spec:
             secretKeyRef:
               name: sentry-secret
               key: SENTRY_SECRET_KEY
+        livenessProbe:
+          httpGet:
+            port: 9000
 
 ---
 
