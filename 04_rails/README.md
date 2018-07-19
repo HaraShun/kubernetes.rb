@@ -13,53 +13,53 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
 
 2. DB用のStatefulSet, Service, Secret作成
 
-   ```
-   $ kubectl apply -f k8s/db
-   secret/db-secret created
-   service/db-service created
-   statefulset.apps/db-statefulset created
-   ```
+    ```
+    $ kubectl apply -f k8s/db
+    secret/db-secret created
+    service/db-service created
+    statefulset.apps/db-statefulset created
+    ```
 
 3. Rails用のDeployment, Service, Secret, ConfigMap作成
 
-   ```
-   $ kubectl apply -f k8s/rails
-   configmap/rails-nginx-config created
-   deployment.apps/rails-deployment created
-   secret/rails-secret created
-   service/rails-service created
-   ```
+    ```
+    $ kubectl apply -f k8s/rails
+    configmap/rails-nginx-config created
+    deployment.apps/rails-deployment created
+    secret/rails-secret created
+    service/rails-service created
+    ```
 
 4. DBの作成とマイグレーション、初期データの投入Jobを実行
 
-   ```
-   $ kubectl apply -f k8s/jobs/rails-db-create-job.yaml
-   job.batch/rails-db-create-job created
+    ```
+    $ kubectl apply -f k8s/jobs/rails-db-create-job.yaml
+    job.batch/rails-db-create-job created
 
-   # ジョブの実行を待つ
-   $ kubectl get jobs -w
-   NAME                  DESIRED   SUCCESSFUL   AGE
-   rails-db-create-job   1         1            42s
+    # ジョブの実行を待つ
+    $ kubectl get jobs -w
+    NAME                  DESIRED   SUCCESSFUL   AGE
+    rails-db-create-job   1         1            42s
 
-   $ kubectl apply -f k8s/jobs/rails-db-migrate-job.yaml
-   job.batch/rails-db-migrate-job created
+    $ kubectl apply -f k8s/jobs/rails-db-migrate-job.yaml
+    job.batch/rails-db-migrate-job created
 
-   # ジョブの実行を待つ
-   $ kubectl get jobs -w
-   NAME                   DESIRED   SUCCESSFUL   AGE
-   rails-db-create-job    1         1            1m
-   rails-db-migrate-job   1         1            11s
+    # ジョブの実行を待つ
+    $ kubectl get jobs -w
+    NAME                   DESIRED   SUCCESSFUL   AGE
+    rails-db-create-job    1         1            1m
+    rails-db-migrate-job   1         1            11s
 
-   $ kubectl apply -f k8s/jobs/rails-db-seed-job.yaml
-   job.batch/rails-db-seed-job created
+    $ kubectl apply -f k8s/jobs/rails-db-seed-job.yaml
+    job.batch/rails-db-seed-job created
 
-   # ジョブの実行を待つ
-   $ kubectl get jobs -w
-   NAME                   DESIRED   SUCCESSFUL   AGE
-   rails-db-create-job    1         1            3m
-   rails-db-migrate-job   1         1            1m
-   rails-db-seed-job      1         1            15s
-   ```
+    # ジョブの実行を待つ
+    $ kubectl get jobs -w
+    NAME                   DESIRED   SUCCESSFUL   AGE
+    rails-db-create-job    1         1            3m
+    rails-db-migrate-job   1         1            1m
+    rails-db-seed-job      1         1            15s
+    ```
 
 5. アプリケーションの検査と表示
 
@@ -80,7 +80,7 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
 
 7. Railsのアプリケーションにログインできることを確認する
 
-   ![image](rails_login.png)
+    ![image](rails_login.png)
 
 8. クリーンアップ
 
@@ -107,53 +107,53 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
 
 2. DB用のStatefulSet, Service, Secret作成
 
-   ```
-   $ kubectl apply -f k8s/db
-   secret/db-secret created
-   service/db-service created
-   statefulset.apps/db-statefulset created
-   ```
+    ```
+    $ kubectl apply -f k8s/db
+    secret/db-secret created
+    service/db-service created
+    statefulset.apps/db-statefulset created
+    ```
 
 3. Rails用のDeployment, Service, Secret, ConfigMap作成
 
-   ```
-   $ kubectl apply -f k8s/rails
-   configmap/rails-nginx-config created
-   deployment.apps/rails-deployment created
-   secret/rails-secret created
-   service/rails-service created
-   ```
+    ```
+    $ kubectl apply -f k8s/rails
+    configmap/rails-nginx-config created
+    deployment.apps/rails-deployment created
+    secret/rails-secret created
+    service/rails-service created
+    ```
 
 4. DBの作成とマイグレーション、初期データの投入Jobを実行
 
-   ```
-   $ kubectl apply -f k8s/jobs/rails-db-create-job.yaml
-   job.batch/rails-db-create-job created
+    ```
+    $ kubectl apply -f k8s/jobs/rails-db-create-job.yaml
+    job.batch/rails-db-create-job created
 
-   # ジョブの実行を待つ
-   $ kubectl get jobs -w
-   NAME                  DESIRED   SUCCESSFUL   AGE
-   rails-db-create-job   1         1            42s
+    # ジョブの実行を待つ
+    $ kubectl get jobs -w
+    NAME                  DESIRED   SUCCESSFUL   AGE
+    rails-db-create-job   1         1            42s
 
-   $ kubectl apply -f k8s/jobs/rails-db-migrate-job.yaml
-   job.batch/rails-db-migrate-job created
+    $ kubectl apply -f k8s/jobs/rails-db-migrate-job.yaml
+    job.batch/rails-db-migrate-job created
 
-   # ジョブの実行を待つ
-   $ kubectl get jobs -w
-   NAME                   DESIRED   SUCCESSFUL   AGE
-   rails-db-create-job    1         1            1m
-   rails-db-migrate-job   1         1            11s
+    # ジョブの実行を待つ
+    $ kubectl get jobs -w
+    NAME                   DESIRED   SUCCESSFUL   AGE
+    rails-db-create-job    1         1            1m
+    rails-db-migrate-job   1         1            11s
 
-   $ kubectl apply -f k8s/jobs/rails-db-seed-job.yaml
-   job.batch/rails-db-seed-job created
+    $ kubectl apply -f k8s/jobs/rails-db-seed-job.yaml
+    job.batch/rails-db-seed-job created
 
-   # ジョブの実行を待つ
-   $ kubectl get jobs -w
-   NAME                   DESIRED   SUCCESSFUL   AGE
-   rails-db-create-job    1         1            3m
-   rails-db-migrate-job   1         1            1m
-   rails-db-seed-job      1         1            15s
-   ```
+    # ジョブの実行を待つ
+    $ kubectl get jobs -w
+    NAME                   DESIRED   SUCCESSFUL   AGE
+    rails-db-create-job    1         1            3m
+    rails-db-migrate-job   1         1            1m
+    rails-db-seed-job      1         1            15s
+    ```
 
 5. アプリケーションの検査と表示
 
@@ -167,7 +167,7 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
 
 6. `http://{EXTERNAL-IP}` を確認
 
-   ![image](rails_login.png)
+    ![image](rails_login.png)
 
 8. クリーンアップ
 

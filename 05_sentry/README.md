@@ -11,59 +11,59 @@
 
 2. DB用のStatefulSet, Service, Secret作成
 
-   ```
-   $ kubectl apply -f k8s/db
-   secret/db-secret created
-   service/db-service created
-   statefulset.apps/db-statefulset created
-   ```
+    ```
+    $ kubectl apply -f k8s/db
+    secret/db-secret created
+    service/db-service created
+    statefulset.apps/db-statefulset created
+    ```
 
 3. Redis用のStatefulSet, Service作成
 
-   ```
-   $ kubectl apply -f k8s/redis
-   service/redis-service created
-   statefulset.apps/redis-statefulset created
-   ```
+    ```
+    $ kubectl apply -f k8s/redis
+    service/redis-service created
+    statefulset.apps/redis-statefulset created
+    ```
 
 4. Sentry用のSecretのみ作成
 
-   ```
-   $ kubectl apply -f k8s/sentry/secret.yaml
-   secret/sentry-secret created
-   ```
+    ```
+    $ kubectl apply -f k8s/sentry/secret.yaml
+    secret/sentry-secret created
+    ```
 
 5. DBのマイグレーションとsuperuserの作成Jobを実行
 
-   ```
-   $ kubectl apply -f k8s/jobs/sentry-upgrade-job.yaml
-   job.batch/sentry-upgrade-job created
+    ```
+    $ kubectl apply -f k8s/jobs/sentry-upgrade-job.yaml
+    job.batch/sentry-upgrade-job created
 
-   # ジョブの実行を待つ
-   $ kubectl get jobs -w
-   NAME                 DESIRED   SUCCESSFUL   AGE
-   sentry-upgrade-job   1         1            3m
+    # ジョブの実行を待つ
+    $ kubectl get jobs -w
+    NAME                 DESIRED   SUCCESSFUL   AGE
+    sentry-upgrade-job   1         1            3m
 
-   $ kubectl apply -f k8s/jobs/sentry-createuser-job.yaml
-   job.batch/sentry-createuser-job created
+    $ kubectl apply -f k8s/jobs/sentry-createuser-job.yaml
+    job.batch/sentry-createuser-job created
 
-   # ジョブの実行を待つ
-   $ kubectl get jobs -w
-   NAME                     DESIRED   SUCCESSFUL   AGE
-   sentry-createuser-job    1         1            6s
-   sentry-upgrade-job       1         1            3m
-   ```
+    # ジョブの実行を待つ
+    $ kubectl get jobs -w
+    NAME                     DESIRED   SUCCESSFUL   AGE
+    sentry-createuser-job    1         1            6s
+    sentry-upgrade-job       1         1            3m
+    ```
 
 6. Sentry用のDeployment, StatefulSet, Service作成
 
-   ```
-   $ kubectl apply -f k8s/sentry
-   deployment.apps/sentry-web-deployment created
-   deployment.apps/sentry-cron-deployment created
-   secret/sentry-secret unchanged
-   service/sentry-service created
-   statefulset.apps/sentry-worker-statefulset created
-   ```
+    ```
+    $ kubectl apply -f k8s/sentry
+    deployment.apps/sentry-web-deployment created
+    deployment.apps/sentry-cron-deployment created
+    secret/sentry-secret unchanged
+    service/sentry-service created
+    statefulset.apps/sentry-worker-statefulset created
+    ```
 
 7. アプリケーションの検査と表示
 
@@ -111,59 +111,59 @@
 
 2. DB用のStatefulSet, Service, Secret作成
 
-   ```
-   $ kubectl apply -f k8s/db
-   secret/db-secret created
-   service/db-service created
-   statefulset.apps/db-statefulset created
-   ```
+    ```
+    $ kubectl apply -f k8s/db
+    secret/db-secret created
+    service/db-service created
+    statefulset.apps/db-statefulset created
+    ```
 
 3. Redis用のStatefulSet, Service作成
 
-   ```
-   $ kubectl apply -f k8s/redis
-   service/redis-service created
-   statefulset.apps/redis-statefulset created
-   ```
+    ```
+    $ kubectl apply -f k8s/redis
+    service/redis-service created
+    statefulset.apps/redis-statefulset created
+    ```
 
 4. Sentry用のSecretのみ作成
 
-   ```
-   $ kubectl apply -f k8s/sentry/secret.yaml
-   secret/sentry-secret created
-   ```
+    ```
+    $ kubectl apply -f k8s/sentry/secret.yaml
+    secret/sentry-secret created
+    ```
 
 5. DBのマイグレーションとsuperuserの作成Jobを実行
 
-   ```
-   $ kubectl apply -f k8s/jobs/sentry-upgrade-job.yaml
-   job.batch/sentry-upgrade-job created
+    ```
+    $ kubectl apply -f k8s/jobs/sentry-upgrade-job.yaml
+    job.batch/sentry-upgrade-job created
 
-   # ジョブの実行を待つ
-   $ kubectl get jobs -w
-   NAME                 DESIRED   SUCCESSFUL   AGE
-   sentry-upgrade-job   1         1            3m
+    # ジョブの実行を待つ
+    $ kubectl get jobs -w
+    NAME                 DESIRED   SUCCESSFUL   AGE
+    sentry-upgrade-job   1         1            3m
 
-   $ kubectl apply -f k8s/jobs/sentry-createuser-job.yaml
-   job.batch/sentry-createuser-job created
+    $ kubectl apply -f k8s/jobs/sentry-createuser-job.yaml
+    job.batch/sentry-createuser-job created
 
-   # ジョブの実行を待つ
-   $ kubectl get jobs -w
-   NAME                     DESIRED   SUCCESSFUL   AGE
-   sentry-createuser-job    1         1            6s
-   sentry-upgrade-job       1         1            3m
-   ```
+    # ジョブの実行を待つ
+    $ kubectl get jobs -w
+    NAME                     DESIRED   SUCCESSFUL   AGE
+    sentry-createuser-job    1         1            6s
+    sentry-upgrade-job       1         1            3m
+    ```
 
 6. Sentry用のDeployment, StatefulSet, Service作成
 
-   ```
-   $ kubectl apply -f k8s/sentry
-   deployment.apps/sentry-web-deployment created
-   deployment.apps/sentry-cron-deployment created
-   secret/sentry-secret unchanged
-   service/sentry-service created
-   statefulset.apps/sentry-worker-statefulset created
-   ```
+    ```
+    $ kubectl apply -f k8s/sentry
+    deployment.apps/sentry-web-deployment created
+    deployment.apps/sentry-cron-deployment created
+    secret/sentry-secret unchanged
+    service/sentry-service created
+    statefulset.apps/sentry-worker-statefulset created
+    ```
 
 7. アプリケーションの検査と表示
 
