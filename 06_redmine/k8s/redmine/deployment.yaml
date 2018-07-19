@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redmine-deployment
+  labels:
+    app: redmine
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redmine
+  template:
+    metadata:
+      labels:
+        app: redmine
+    spec:
+      containers:
+      - name: app
+        image: redmine:3.4.6-passenger
+        ports:
+        - containerPort: 3000
+        env:
+        - name: REDMINE_DB_POSTGRES
+          value: db-service.default.svc.cluster.local
+        - name: REDMINE_DB_USERNAME
+          value: redmine
+        - name: REDMINE_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD
+        - name: REDMINE_SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: redmine-secret
+              key: SECRET_KEY_BASE
+        livenessProbe:
+          httpGet:
+            port: 3000
