@@ -25,7 +25,8 @@ TODO
     - 最初は概念を掴むのが難しいことがありますので、わからないことがあれば、サポート役の [@\_tsub\_](https://twitter.com/_tsub_)さん, [@katsuhisa\_\_](https://twitter.com/katsuhisa__)さんに質問をしてください。
     - 適当に会話しながら進めてください
 3. 各自発表 (17:15〜17:45)
-    - フィードバック （Trelloを利用する予定）
+    - フィードバック （Trelloを利用します）
+    - https://trello.com/invite/b/uCM7j7v0/733cdb35f91b532bb75de8b9402360ce/kubernetesrb
 
 ## 参考
 
