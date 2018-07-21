@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: generate-vapid-key-job
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        name: generate-vapid-key-job
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: app
+        image: tootsuite/mastodon:edge
+        command: ["bundle", "exec", "rake", "mastodon:webpush:generate_vapid_key"]
+        env:
+        - name: RAILS_ENV
+          value: production
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: SECRET_KEY_BASE
+        - name: OTP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: OTP_SECRET

@@ -1,0 +1,133 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mastodon-web-deployment
+  labels:
+    app: mastodon-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mastodon-web
+  template:
+    metadata:
+      labels:
+        app: mastodon-web
+    spec:
+      containers:
+      - name: app
+        image: tootsuite/mastodon:edge
+        command: ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+        lifecycle:
+          postStart:
+            exec:
+              command: ["bundle", "exec", "rake", "assets:precompile"]
+        env:
+        - name: RACK_ENV
+          value: deployment
+        - name: RAILS_ENV
+          value: production
+        - name: REDIS_HOST
+          value: redis-service.default.svc.cluster.local
+        - name: DB_HOST
+          value: db-service.default.svc.cluster.local
+        - name: DB_USER
+          value: mastodon
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD
+        - name: LOCAL_DOMAIN
+          value: mastodon.local
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: SECRET_KEY_BASE
+        - name: OTP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: OTP_SECRET
+        - name: VAPID_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: VAPID_PRIVATE_KEY
+        - name: VAPID_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: VAPID_PUBLIC_KEY
+        - name: SINGLE_USER_MODE
+          value: "true"
+      - name: web
+        image: steveltn/https-portal:1
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        env:
+        - name: DOMAINS
+          value: "mastodon.local -> http://127.0.0.1:3000"
+        - name: STAGE
+          value: local
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mastodon-worker-deployment
+  labels:
+    app: mastodon-worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mastodon-worker
+  template:
+    metadata:
+      labels:
+        app: mastodon-worker
+    spec:
+      containers:
+      - name: worker
+        image: tootsuite/mastodon:edge
+        command: ["bundle", "exec", "sidekiq", "-q", "default", "-q", "mailers", "-q", "pull", "-q", "push"]
+        env:
+        - name: RAILS_ENV
+          value: production
+        - name: REDIS_HOST
+          value: redis-service.default.svc.cluster.local
+        - name: DB_HOST
+          value: db-service.default.svc.cluster.local
+        - name: DB_USER
+          value: mastodon
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD
+        - name: LOCAL_DOMAIN
+          value: mastodon.local
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: SECRET_KEY_BASE
+        - name: OTP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: OTP_SECRET
+        - name: VAPID_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: VAPID_PRIVATE_KEY
+        - name: VAPID_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: VAPID_PUBLIC_KEY

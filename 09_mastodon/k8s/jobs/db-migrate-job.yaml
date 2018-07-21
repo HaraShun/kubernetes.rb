@@ -1,0 +1,42 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migrate-jobb
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        name: db-migrate-job
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: app
+        image: tootsuite/mastodon:edge
+        command: ["bin/rails", "db:migrate"]
+        env:
+        - name: RAILS_ENV
+          value: production
+        - name: REDIS_HOST
+          value: redis-service.default.svc.cluster.local
+        - name: DB_HOST
+          value: db-service.default.svc.cluster.local
+        - name: DB_USER
+          value: mastodon
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD
+        - name: LOCAL_DOMAIN
+          value: mastodon.local
+        - name: SECRET_KEY_BASE
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: SECRET_KEY_BASE
+        - name: OTP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mastodon-secret
+              key: OTP_SECRET
