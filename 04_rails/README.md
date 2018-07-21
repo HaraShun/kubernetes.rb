@@ -9,6 +9,9 @@ https://github.com/yhirano55/react-redux-jwt-authentication-example/
     ```
     $ minikube start
     $ minikube dashboard # 起動するとわかりやすい
+
+    # クラスターが作成できない場合は以下を実行
+    $ minikube delete && rm -rf ~/.minikube
     ```
 
 2. DB用のStatefulSet, Service, Secret作成
