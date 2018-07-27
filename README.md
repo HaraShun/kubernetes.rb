@@ -1,6 +1,6 @@
-# kubernetes.rb
+# kubernetes.rb #2
 
-https://localhost.connpass.com/event/90340/
+https://localhost.connpass.com/event/95578/
 
 ## Twitter Hashtag
 
@@ -8,28 +8,27 @@ https://localhost.connpass.com/event/90340/
 
 ## 会場のご提供
 
-株式会社万葉 様
+Repro株式会社 様
 
 ## 設備案内
 
-TODO
+- お手洗いは会場を出て突き当りにあります
+- WiFiあります。
+- イベントスペースで淹れたてコーヒーが飲めるマシンがあります。自由に飲んで頂いて結構です。
+- 飲食可能です。フロアに自販機はありませんが、建物1Fにコンビニやマクドナルドがあります。
+- 電源あります。足りない場合は延長ケーブルお出しするのでお声がけください。
+- ディスプレイ欲しい人が居たら、オフィススペースから貸出することも可能です。お声がけください。
+- 書籍もぼちぼちありますので、こんな本ありますか？とお声がけください。イベントスペース内であればお貸しできます。
 
 ## アジェンダ
 
-1. 自己紹介 (13:00〜13:15)
+1. 自己紹介 (11:00〜11:15)
     - 名前
     - 所属・普段何をやっているか
     - 今日の参加理由 or 意気込み
-2. 各自K8S体験 (13:15〜17:15)
-    - 本リポジトリをcloneして、設定から順に進めてください。
-    - 最初は概念を掴むのが難しいことがありますので、わからないことがあれば、サポート役の [@\_tsub\_](https://twitter.com/_tsub_)さん, [@katsuhisa\_\_](https://twitter.com/katsuhisa__)さんに質問をしてください。
-    - 適当に会話しながら進めてください
-3. 各自発表 (17:15〜17:45)
+2. ワークショップ（11:15〜13:00）
+3. ランチ休憩（13:00〜14:00）
+4. ワークショップ（14:00〜17:15）
+5. 振り返り (17:15〜18:00)
     - フィードバック （Trelloを利用します）
     - https://trello.com/invite/b/uCM7j7v0/733cdb35f91b532bb75de8b9402360ce/kubernetesrb
-
-## 参考
-
-- [KubernetesのWorkloadsリソース（その1） | Think IT（シンクイット）](https://thinkit.co.jp/article/13610)
-- [minikubeでKubernetesのチュートリアルをやってみた](https://hnakamur.github.io/blog/2016/12/31/tried-kubernetes-tutorial-with-minikube/)
-- [MinikubeでMacのローカル環境にKubernetesクラスターを立ち上げる - ブロックチェーンエンジニアとして生きる](https://tomokazu-kozuma.com/launch-kubernetes-cluster-in-macs-local-environment-with-minikube/)
