@@ -1,57 +1,5 @@
 # Nginx
 
-## Minikube
-
-1. VM上にk8sクラスタを作成
-
-    ```
-    $ minikube start
-    $ minikube dashboard # 起動するとわかりやすい
-
-    # クラスターが作成できない場合は以下を実行
-    $ minikube delete && rm -rf ~/.minikube
-    ```
-
-2. Deploymentを作成
-
-    ```
-    $ kubectl apply -f k8s/deployment.yaml
-    deployment.apps/nginx created
-    ```
-
-3. Deploymentを公開
-
-    ```
-    $ kubectl apply -f k8s/service.yaml
-    service/nginx created
-    ```
-
-4. アプリケーションの検査と表示
-
-    ```
-    $ kubectl get services
-    NAME          TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
-    kubernetes    ClusterIP      10.96.0.1        <none>        443/TCP        57m
-    nginx         LoadBalancer   10.103.122.40    <pending>     80:31052/TCP   13s
-    ```
-
-5. nginxのURLを確認する
-
-    ```
-    $ minikube service nginx --url
-    http://192.168.99.100:30685
-    ```
-
-6. クリーンアップ
-
-    ```
-    $ kubectl delete deployments --all
-    $ kubectl delete services --all
-    $ minikube delete # 終了する場合
-    ```
-
----
-
 ## GKE
 
 1. GKE上にクラスタを作成
@@ -105,6 +53,60 @@
 
     $ gcloud compute http-health-checks delete {NAME}
     ```
+
+---
+
+## Minikube
+
+    1. VM上にk8sクラスタを作成
+
+        ```
+        $ minikube start
+        $ minikube dashboard # 起動するとわかりやすい
+
+        # クラスターが作成できない場合は以下を実行
+        $ minikube delete && rm -rf ~/.minikube
+        ```
+
+    2. Deploymentを作成
+
+        ```
+        $ kubectl apply -f k8s/deployment.yaml
+        deployment.apps/nginx created
+        ```
+
+    3. Deploymentを公開
+
+        ```
+        $ kubectl apply -f k8s/service.yaml
+        service/nginx created
+        ```
+
+    4. アプリケーションの検査と表示
+
+        ```
+        $ kubectl get services
+        NAME          TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+        kubernetes    ClusterIP      10.96.0.1        <none>        443/TCP        57m
+        nginx         LoadBalancer   10.103.122.40    <pending>     80:31052/TCP   13s
+        ```
+
+    5. nginxのURLを確認する
+
+        ```
+        $ minikube service nginx --url
+        http://192.168.99.100:30685
+        ```
+
+    6. クリーンアップ
+
+        ```
+        $ kubectl delete deployments --all
+        $ kubectl delete services --all
+        $ minikube delete # 終了する場合
+        ```
+
+---
 
 ## 参考
 

@@ -3,12 +3,6 @@
 * 参考にした記事  
 [kubernetes-gitlab/README.md at master · lwolf/kubernetes-gitlab](https://github.com/lwolf/kubernetes-gitlab/blob/master/README.md)
 
-## Minikube
-[WIP]
-
-
----
-
 ## GKE
 
 1. GKE上にk8sクラスターを作成
@@ -32,7 +26,7 @@
     ```
 
 5. deploy gitlab itself
-    ``` 
+    ```
     $ kubectl create -f gitlab/gitlab-svc.yml
     $ kubectl create -f gitlab/gitlab-svc-nodeport.yml
     $ kubectl create -f gitlab/gitlab-deployment.yml
@@ -52,3 +46,8 @@
     ```
     $ kubectl delete -f namespace/gitlab-ns.yml
     ```    
+
+---
+
+## Minikube
+[WIP]

@@ -1,70 +1,5 @@
 # Redmine
 
-## Minikube
-
-1. VM上にk8sクラスターを作成
-
-    ```
-    $ minikube start
-    $ minikube dashboard # 起動するとわかりやすい
-
-    # クラスターが作成できない場合は以下を実行
-    $ minikube delete && rm -rf ~/.minikube
-    ```
-
-2. DB用のStatefulSet, Service, Secret作成
-
-    ```
-    $ kubectl apply -f k8s/db
-    secret/db-secret created
-    service/db-service created
-    statefulset.apps/db-statefulset created
-    ```
-
-3. Redmine用のDeployment, Service, Secret作成
-
-    ```
-    $ kubectl apply -f k8s/redmine
-    deployment.apps/redmine-deployment created
-    secret/redmine-secret created
-    service/redmine-service created
-    ```
-
-4. アプリケーションの検査と表示
-
-    ```
-    $ kubectl get services
-    NAME              TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
-    db-service        ClusterIP      10.108.165.132   <none>        5432/TCP       15m
-    kubernetes        ClusterIP      10.96.0.1        <none>        443/TCP        16m
-    redmine-service   LoadBalancer   10.108.202.31    <pending>     80:30782/TCP   14m
-    ```
-
-5. redmine-serviceのURLを確認する
-
-    ```
-    $ minikube service redmine-service --url
-    http://192.168.64.12:30782
-    ```
-
-6. Redmineのアプリケーションにログインできることを確認する
-    * パスワードは Redmine のデフォルトで `admin` です
-
-    ![image](redmine_login.png)
-
-7. クリーンアップ
-
-    ```
-    $ kubectl delete deployments --all
-    $ kubectl delete statefulsets --all
-    $ kubectl delete services --all
-    $ kubectl delete secrets --all
-    $ kubectl delete persistentVolumeClaims --all
-    $ minikube delete # 終了する場合
-    ```
-
----
-
 ## GKE
 
 1. GKE上にk8sクラスターを作成
@@ -131,4 +66,69 @@
     k8s-b3bfb4ae39736392-node        10256  /healthz
 
     $ gcloud compute http-health-checks delete {NAME}
+    ```
+
+---
+
+## Minikube
+
+1. VM上にk8sクラスターを作成
+
+    ```
+    $ minikube start
+    $ minikube dashboard # 起動するとわかりやすい
+
+    # クラスターが作成できない場合は以下を実行
+    $ minikube delete && rm -rf ~/.minikube
+    ```
+
+2. DB用のStatefulSet, Service, Secret作成
+
+    ```
+    $ kubectl apply -f k8s/db
+    secret/db-secret created
+    service/db-service created
+    statefulset.apps/db-statefulset created
+    ```
+
+3. Redmine用のDeployment, Service, Secret作成
+
+    ```
+    $ kubectl apply -f k8s/redmine
+    deployment.apps/redmine-deployment created
+    secret/redmine-secret created
+    service/redmine-service created
+    ```
+
+4. アプリケーションの検査と表示
+
+    ```
+    $ kubectl get services
+    NAME              TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+    db-service        ClusterIP      10.108.165.132   <none>        5432/TCP       15m
+    kubernetes        ClusterIP      10.96.0.1        <none>        443/TCP        16m
+    redmine-service   LoadBalancer   10.108.202.31    <pending>     80:30782/TCP   14m
+    ```
+
+5. redmine-serviceのURLを確認する
+
+    ```
+    $ minikube service redmine-service --url
+    http://192.168.64.12:30782
+    ```
+
+6. Redmineのアプリケーションにログインできることを確認する
+    * パスワードは Redmine のデフォルトで `admin` です
+
+    ![image](redmine_login.png)
+
+7. クリーンアップ
+
+    ```
+    $ kubectl delete deployments --all
+    $ kubectl delete statefulsets --all
+    $ kubectl delete services --all
+    $ kubectl delete secrets --all
+    $ kubectl delete persistentVolumeClaims --all
+    $ minikube delete # 終了する場合
     ```

@@ -3,11 +3,6 @@
 * 参考記事
 [Install - Kong on Kubernetes | Kong - Open-Source API Management and Microservice Management](https://docs.konghq.com/install/kubernetes/)
 
-## Minikube
-[WIP]
-
-
----
 
 ## GKE
 
@@ -68,3 +63,8 @@
     ```
     $ kubectl delete all
     ```
+
+---
+
+## Minikube
+    [WIP]

@@ -2,6 +2,58 @@
 
 https://github.com/yhirano55/static-sinatra-example/
 
+## GKE
+
+1. GKE上にk8sクラスターを作成
+
+    ```
+    $ gcloud container clusters create {CLUSTER_NAME}
+    ```
+
+2. Deployment作成
+
+    ```
+    $ kubectl apply -f k8s/deployment.yaml
+    ```
+
+2. Service作成
+
+    ```
+    $ kubectl apply -f k8s/service.yaml
+    ```
+
+3. アプリケーションの検査と表示
+
+    ```
+    $ kubectl get services
+    NAME         TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)        AGE
+    kubernetes   ClusterIP      10.7.240.1    <none>           443/TCP        35m
+    web-server   LoadBalancer   10.7.241.60   35.229.159.223   80:31954/TCP   1m
+    ```
+
+4. クリーンアップ
+
+    ```
+    $ kubectl delete services --all
+    $ gcloud container clusters delete {CLUSTER_NAME}
+
+    # Target Pool が消えてなかったら削除する
+    $ gcloud compute target-pools list
+    NAME                              REGION           SESSION_AFFINITY  BACKUP  HEALTH_CHECKS
+    a94cad7df8b4a11e88e7d42010a92012  asia-northeast1  NONE                      k8s-b3bfb4ae39736392-node
+
+    $ gcloud compute target-pools delete {NAME}
+
+    # Load Balancer が消えてなかったら削除する
+    $ gcloud compute http-health-checks list
+    NAME                       HOST  PORT   REQUEST_PATH
+    k8s-b3bfb4ae39736392-node        10256  /healthz
+
+    $ gcloud compute http-health-checks delete {NAME}
+    ```
+
+---
+
 ## Minikube
 
 1. VM上にk8sクラスターを作成
@@ -53,56 +105,6 @@ https://github.com/yhirano55/static-sinatra-example/
     ```
 
 ---
-
-## GKE
-
-1. GKE上にk8sクラスターを作成
-
-    ```
-    $ gcloud container clusters create {CLUSTER_NAME}
-    ```
-
-2. Deployment作成
-
-    ```
-    $ kubectl apply -f k8s/deployment.yaml
-    ```
-
-2. Service作成
-
-    ```
-    $ kubectl apply -f k8s/service.yaml
-    ```
-
-3. アプリケーションの検査と表示
-
-    ```
-    $ kubectl get services
-    NAME         TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)        AGE
-    kubernetes   ClusterIP      10.7.240.1    <none>           443/TCP        35m
-    web-server   LoadBalancer   10.7.241.60   35.229.159.223   80:31954/TCP   1m
-    ```
-
-4. クリーンアップ
-
-    ```
-    $ kubectl delete services --all
-    $ gcloud container clusters delete {CLUSTER_NAME}
-
-    # Target Pool が消えてなかったら削除する
-    $ gcloud compute target-pools list
-    NAME                              REGION           SESSION_AFFINITY  BACKUP  HEALTH_CHECKS
-    a94cad7df8b4a11e88e7d42010a92012  asia-northeast1  NONE                      k8s-b3bfb4ae39736392-node
-
-    $ gcloud compute target-pools delete {NAME}
-
-    # Load Balancer が消えてなかったら削除する
-    $ gcloud compute http-health-checks list
-    NAME                       HOST  PORT   REQUEST_PATH
-    k8s-b3bfb4ae39736392-node        10256  /healthz
-
-    $ gcloud compute http-health-checks delete {NAME}
-    ```
 
 ## 参考
 
