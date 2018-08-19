@@ -42,7 +42,17 @@
     $ kubectl create -f ingress/gitlab-ingress.yml
     ```
 
-7. クリーンアップ
+7. describe pods
+    ```
+    $ kubectl get po --namespace=gitlab
+    ```
+
+7. describe serivce
+    ```
+    $ kubectl get svc --namespace=gitlab
+    ```
+
+9. クリーンアップ
     ```
     $ kubectl delete -f namespace/gitlab-ns.yml
     ```    
