@@ -1,3 +1,10 @@
+# Kubernetes (GKE) Handson Sample
+
+[![Kubernetes version](https://img.shields.io/badge/Kubernetes-v1.12.1-0040FF.svg?style=popout)](https://github.com/kubernetes/kubernetes/releases)
+[![istio version](https://img.shields.io/badge/istio-v1.0.2-6600cc.svg?style=popout)](https://github.com/istio/istio/releases/)
+![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
+![GitHub repo size in bytes](https://img.shields.io/github/repo-size/badges/shields.svg)
+
 ## イベント名
 
 [【サポーターズCoLab勉強会】Kubernetes（GKE）ハンズオン勉強会 - サポーターズCoLab](https://supporterzcolab.com/event/494/)
